@@ -1,7 +1,7 @@
-plaintext=input()
-keyword=input()
 def encrypt_vigenere(plaintext, keyword):
     """
+    Encrypts plaintext using a Vigenere cipher.
+
     >>> encrypt_vigenere("PYTHON", "A")
     'PYTHON'
     >>> encrypt_vigenere("python", "a")
@@ -9,20 +9,20 @@ def encrypt_vigenere(plaintext, keyword):
     >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
     'LXFOPVEFRNHR'
     """
-    ciphertext = ""
-    while len(plaintext) > len(keyword):
-        keyword += keyword
-    while len(keyword) > len(plaintext):
-        keyword = keyword[:-1]
-    for i in range(0,len(plaintext)):
-        if (ord(plaintext[i]) + ord(keyword[i]) - 65 > 0) and (ord(plaintext[i]) + ord(keyword[i]) - 65 < 27):
-            ciphertext += chr(ord(plaintext[i]) + ord(keyword[i]) - 65)
-        elif not((ord(plaintext[i]) + ord(keyword[i]) - 65 > 0)) or not((ord(plaintext[i]) + ord(keyword[i]) - 65 < 27)):
-            ciphertext += chr(ord(plaintext[i]) + ord(keyword[i]) - 26 - 65)
-        elif (ord(plaintext[i]) + ord(keyword[i]) - 97 > 0) and (ord(plaintext[i]) + ord( keyword[i]) - 97 < 27):
-            ciphertext += chr(ord(plaintext[i]) + ord(keyword[i])-97)
-        else:
-            ciphertext += chr(ord(plaintext[i]) + ord(keyword[i]) - 26 - 97)
-    return print(ciphertext)
+    # PUT YOUR CODE HERE
+    return ciphertext
 
-encrypt_vigenere(plaintext,keyword)
+
+def decrypt_vigenere(ciphertext, keyword):
+    """
+    Decrypts a ciphertext using a Vigenere cipher.
+
+    >>> decrypt_vigenere("PYTHON", "A")
+    'PYTHON'
+    >>> decrypt_vigenere("python", "a")
+    'python'
+    >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
+    'ATTACKATDAWN'
+    """
+    # PUT YOUR CODE HERE
+    return plaintext
