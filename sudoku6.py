@@ -94,7 +94,8 @@ def find_possible_values(grid, pos):
     r = set(get_row(grid, pos))
     checker -= r
     checker -= c
-    checker -= set(get_block[i])
+    for i in range(3):
+         checker -= set(get_block[i])
     return checker
 
 def solve(grid):
@@ -116,6 +117,7 @@ def solve(grid):
         solution = solve[grid]
         if solution != None:
             return grid
+    grid[col][row] = "."
     return None
 
 
