@@ -95,7 +95,7 @@ def find_possible_values(grid, pos):
     checker -= r
     checker -= c
     for i in range(3):
-         checker -= set(get_block[i])
+         checker -= set(b[i])
     return checker
 
 def solve(grid):
