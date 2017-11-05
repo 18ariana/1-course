@@ -27,7 +27,7 @@ def group(values, n):
     >>> group([1,2,3,4,5,6,7,8,9], 3)
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     """
-    return print([values[n*i:n*i+n] for i in range(n)])
+    return ([values[n*i:n*i+n] for i in range(n)])
 
 
 def get_row(values, pos):
