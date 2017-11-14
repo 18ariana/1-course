@@ -106,12 +106,12 @@ class GameOfLife:
         for i in range(self.cell_height):
             for g in range(self.cell_height):
                 if self.clist[i][g] == 1:
-                    if sum(self.get_numbers(self.clist, i, g)) not in (2,3):
+                    if sum(self.get_neighbours(self.clist, i, g)) not in (2,3):
                         new_clist[i][g] = 0
                     else:
                         new_clist[i][g] = 1
                 else:
-                    if sum(self.get_numbers(self.clist, i, g)) == 3:
+                    if sum(self.get_neighbours(self.clist, i, g)) == 3:
                         new_clist[i][g] = 1
                     else:
                         new_clist[i][g] = 0
