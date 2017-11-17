@@ -26,11 +26,11 @@ class GameOfLife:
     def draw_grid(self):
         """ Отрисовать сетку """
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(self.screen, pygame.Color('black'),
-                    (x, 0), (x, self.height))
+            pygame.draw.line
+            (self.screen, pygame.Color('black'), (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(self.screen, pygame.Color('black'),
-                    (0, y), (self.width, y))
+            pygame.draw.line
+            (self.screen, pygame.Color('black'), (0, y), (self.width, y))
 
     def run(self):
         pygame.init()
@@ -58,31 +58,29 @@ class Cell():
     def is_alive(self):
         return self.alive
 
-class CellList:
 
+class CellList:
     def __init__(self, nrows, ncols, randomize=True):
             self.ncols = ncols
             self.nrows = nrows
             if (randomize):
-                self.grid = [[Cell(i, j, random.randint(0, 1))
-                         for i in range(nrows)]
-                         for g in range(ncols)]
+                self.grid =
+                [[Cell(i, j, random.randint(0, 1))for i in range(nrows)] for g in range(ncols)]
             else:
-                self.grid = [[Cell(i, g, 0)
-                            for i in range(nrows)]
-                            for g in range(ncols)]
+                self.grid =
+                [[Cell(i, g, 0)for i in range(nrows)] for g in range(ncols)]
 
     def get_neighbours(self, cell):
-        neighbours = [for i in range(len(self.grid)):
-        for g in range(len(self.grid[i])):
+        neighbours =
+        [for i in range(len(self.grid)):for g in range(len(self.grid[i])):
             n1 = [i + 1, g],
-                 n2 = [i - 1, g],
-                      n3 = [i, g + 1],
-                           n4 = [i, g - 1],
-                                n5 = [i - 1, g + 1],
-                                     n6 = [i + 1, g + 1],
-                                          n7 = [i - 1, g - 1],
-                                               n8 = [i + 1, g + 1]]
+            n2 = [i - 1, g],
+            n3 = [i, g + 1],
+            n4 = [i, g - 1],
+            n5 = [i - 1, g + 1],
+            n6 = [i + 1, g + 1],
+            n7 = [i - 1, g - 1],
+            n8 = [i + 1, g + 1]]
         x, y = cell.row, cell.row
 
         return neighbours
@@ -92,7 +90,7 @@ class CellList:
         for cell in self:
             neighbours = self.get_neighbours(cell)
             if self.grid[i][g] == 1:
-                if sum(self.get_neighbours(cell)) not in (2,3):
+                if sum(self.get_neighbours(cell)) not in (2, 3):
                     new_grid[i][g] = 0
                 else:
                     new_grid[i][g] = 1
@@ -105,23 +103,20 @@ class CellList:
         self.grid = new_grid
         return self
 
-
-
     def __iter__(self):
         self.i_count, self.g_count = 0, 0
         return self
-
+        
     def __next__(self):
-        if (self.i_count == self.nrows):
-            raise StopIteration
+            if (self.i_count == self.nrows):
+                raise StopIteration
+                cell = self.grid[self.i_countnt][self.g_count]
+            self.g_count += 1
+            if self.g_count == self.ncols:
+                self.i_count += 1
+                self.g_count = 0
 
-        cell = self.grid[self.i_countnt][self.g_count]
-        self.g_count += 1
-        if self.g_count == self.ncols:
-            self.i_count += 1
-            self.g_count = 0
-
-        return cell
+            return cell
 
     def __str__(self):
         str = ""
@@ -134,7 +129,6 @@ class CellList:
             str += '\n'
         return str
 
-
     @classmethod
     def from_file(cls, filename):
         grid = []
@@ -144,4 +138,4 @@ class CellList:
                              for j, c in enumerate(line) if c in '01'])
         clist = cls(len(grid), len(grid[0]), False)
         clist.grid = grid
-        return clist
+    return clist
