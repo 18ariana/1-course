@@ -106,7 +106,7 @@ class CellList:
     def __iter__(self):
         self.i_count, self.g_count = 0, 0
         return self
-        
+
     def __next__(self):
             if (self.i_count == self.nrows):
                 raise StopIteration
