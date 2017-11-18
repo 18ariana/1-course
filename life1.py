@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 
 
-
 class GameOfLife:
     def __init__(self, width=640, height=480, cell_size=10, speed=10):
         self.width = width
@@ -53,13 +52,12 @@ class GameOfLife:
         :return: Список клеток, представленный в виде матрицы
         """
 
-        if randomize :
-            self.clist = [[random.randrange(0,2) for i in range(self.cell_width)]
-                        for g in range(self.cell_height)]
+        if randomize:
+            self.clist =
+            [[random.randrange(0, 2) for i in range(self.cell_width)] for g in range(self.cell_height)]
         return self.clist
 
-
-    def draw_cell_list(self, clist):
+   def draw_cell_list(self, clist):
         """ Отображение списка клеток
         :param rects: Список клеток для отрисовки, представленный в виде матрицы
         """
@@ -72,7 +70,7 @@ class GameOfLife:
                 b = cell_size
         if self.clist([i][g]) == 1 :
             pygame.Color('Green')
-        else pygame.Color('White')
+        else : pygame.Color('White')
 
 
 
