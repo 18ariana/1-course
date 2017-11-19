@@ -64,26 +64,25 @@ class CellList:
             self.ncols = ncols
             self.nrows = nrows
             if (randomize):
-                self.grid =
-                [[Cell(i, j, random.randint(0, 1))for i in range(nrows)] for g in range(ncols)]
+                self.grid = [[Cell(i, j, random.randint(0, 1))for i in range(nrows)] for g in range(ncols)]
             else:
-                self.grid =
-                [[Cell(i, g, 0)for i in range(nrows)] for g in range(ncols)]
+                self.grid = [[Cell(i, g, 0)for i in range(nrows)] for g in range(ncols)]
 
-    def get_neighbours(self, cell):
-        neighbours =
-        [for i in range(len(self.grid)):for g in range(len(self.grid[i])):
-            n1 = [i + 1, g],
-            n2 = [i - 1, g],
-            n3 = [i, g + 1],
-            n4 = [i, g - 1],
-            n5 = [i - 1, g + 1],
-            n6 = [i + 1, g + 1],
-            n7 = [i - 1, g - 1],
-            n8 = [i + 1, g + 1]]
+    def get_neighbours(self, n1, n2, n3, n4, n5, n6, n7, n8, cell):
+        neighbours = [ n1, n2, n3, n4, n5, n6, n7, n8 ]
+        for i in range(len(self.grid))):
+            for g in range(len(self.grid)):
+                n1 = [i + 1, g],
+                n2 = [i - 1, g],
+                n3 = [i, g + 1],
+                n4 = [i, g - 1],
+                n5 = [i - 1, g + 1],
+                n6 = [i + 1, g + 1],
+                n7 = [i - 1, g - 1],
+                n8 = [i + 1, g + 1]
         x, y = cell.row, cell.row
 
-        return neighbours
+            return neighbours
 
     def update(self, count):
         new_grid = deepcopy(self.grid)
@@ -138,4 +137,4 @@ class CellList:
                              for j, c in enumerate(line) if c in '01'])
         clist = cls(len(grid), len(grid[0]), False)
         clist.grid = grid
-    return clist
+        return clist
