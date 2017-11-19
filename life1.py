@@ -53,68 +53,69 @@ class GameOfLife:
         """
 
         if randomize:
-            self.clist =
-            [[random.randrange(0, 2) for i in range(self.cell_width)] for g in range(self.cell_height)]
+            self.clist = [[random.randrange(0, 2) for i in range(self.cell_width)] for g in range(self.cell_height)]
         return self.clist
 
-   def draw_cell_list(self, clist):
-        """ Отображение списка клеток
-        :param rects: Список клеток для отрисовки, представленный в виде матрицы
-        """
-        pygame.draw.rect(self.screen,pygame.Color, (x,y,a,b))
-        for i in range(self.cell_width):
+
+def draw_cell_list(self, clist):
+    """ Отображение списка клеток
+    :param rects: Список клеток для отрисовки, представленный в виде матрицы
+    """
+    pygame.draw.rect(self.screen, pygame.Color, (x, y, a, b))
+    for i in range(self.cell_width):
             for g in range(self.cell_height):
                 x = i * self.cell_width - 1
-                y = g * self.cell_height -1
+                y = g * self.cell_height - 1
                 a = cell_size
                 b = cell_size
-        if self.clist([i][g]) == 1 :
-            pygame.Color('Green')
-        else : pygame.Color('White')
+    if self.clist([i][g]) == 1:
+          pygame.Color('Green')
+    else:
+          pygame.Color('White')
 
 
+def get_neighbours(self, clist, n1, n2, n3, n4, n5, n6, n7, n8, neighbours, cell):
+    """ Вернуть список соседей для указанной ячейки
+    :param cell: Позиция ячейки в сетке, задается кортежем вида (row, col)
+    :return: Одномерный список ячеек, смежных к ячейке cell
+    """
+    neighbours = [n1, n2, n3, n4, n5, n6, n7, n8]
+    for i in range(len(self.clist)) :
+        for g in range(len(self.clist)):
+                    n1 = [i + 1, g],
+                    n2 = [i - 1, g],
+                    n3 = [i, g + 1],
+                    n4 = [i, g - 1],
+                    n5 = [i - 1, g + 1],
+                    n6 = [i + 1, g + 1],
+                    n7 = [i - 1, g - 1],
+                    n8 = [i + 1, g + 1]
+    return neighbours
 
-    def get_neighbours(self, cell):
-        """ Вернуть список соседей для указанной ячейки
-        :param cell: Позиция ячейки в сетке, задается кортежем вида (row, col)
-        :return: Одномерный список ячеек, смежных к ячейке cell
-        """
-        neighbours = [for i in range (len( self.clist)):
-            for g in range(len(self.clist[i])):
-                n1 = [i + 1, g],
-                n2 = [i - 1, g],
-                n3 = [i,g + 1],
-                n4 = [i,g - 1],
-                n5 = [i - 1, g + 1],
-                n6 = [i + 1, g + 1],
-                n7 = [i-1, g - 1],
-                n8 = [i +1, g + 1]]
 
-         return neighbours
-
-
-    def update_cell_list(self, cell_list):
-        """ Выполнить один шаг игры.
-        Обновление всех ячеек происходит одновременно. Функция возвращает
-        новое игровое поле.
-        :param cell_list: Игровое поле, представленное в виде матрицы
-        :return: Обновленное игровое поле
-        """
-        new_clist = self.clist
-        for i in range(self.cell_height):
-            for g in range(self.cell_height):
-                if self.clist[i][g] == 1:
-                    if sum(self.get_neighbours(self.clist, i, g)) not in (2,3):
-                        new_clist[i][g] = 0
-                    else:
-                        new_clist[i][g] = 1
+def update_cell_list(self, cell_list):
+    """ Выполнить один шаг игры.
+    Обновление всех ячеек происходит одновременно. Функция возвращает
+    новое игровое поле.
+    :param cell_list: Игровое поле, представленное в виде матрицы
+    :return: Обновленное игровое поле
+    """
+    new_clist = self.clist
+    for i in range(self.cell_height):
+        for g in range(self.cell_height):
+            if self.clist[i][g] == 1:
+                if sum(self.get_neighbours(self.clist, i, g)) not in (2, 3):
+                    new_clist[i][g] = 0
                 else:
-                    if sum(self.get_neighbours(self.clist, i, g)) == 3:
-                        new_clist[i][g] = 1
-                    else:
-                        new_clist[i][g] = 0
-        self.clist = new_clist
-        return self.clist
+                    new_clist[i][g] = 1
+            else:
+                if sum(self.get_neighbours(self.clist, i, g)) == 3:
+                    new_clist[i][g] = 1
+                else:
+                    new_clist[i][g] = 0
+    self.clist = new_clist
+    return self.clist
+
 
 if __name__ == '__main__':
     game = GameOfLife(320, 240, 20)
@@ -122,7 +123,7 @@ if __name__ == '__main__':
 
     # Отрисовка списка клеток
     # Выполнение одного шага игры (обновление состояния ячеек)
-    
+
 
 
     pygame.display.flip()
