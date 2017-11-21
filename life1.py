@@ -117,9 +117,9 @@ class GameOfLife:
         return self.clist
 
 
-   if __name__ == '__main__':
-       game = GameOfLife(320, 240, 20)
-        game.run()
+if __name__ == '__main__':
+     game = GameOfLife(320, 240, 20)
+     game.run()
 
     # Отрисовка списка клеток
     # Выполнение одного шага игры (обновление состояния ячеек)
