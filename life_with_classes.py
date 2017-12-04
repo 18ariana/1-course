@@ -37,16 +37,37 @@ class GameOfLife:
         clock = pygame.time.Clock()
         pygame.display.set_caption('Game of Life')
         self.screen.fill(pygame.Color('white'))
-
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
             self.draw_grid()
+            self.draw_cell_list()
+            self.clist.update()
             pygame.display.flip()
             clock.tick(self.speed)
         pygame.quit()
+        
+    def cell_list(self, randomize=True):
+        self.clist = CellList(self.cell_width, self.cell_height, randomize)
+        self.grid = self.clist.grid
+
+    def draw_cell_list(self):
+        """ Отображение списка клеток
+        :param rects: Список клеток для отрисовки, представленный в виде матрицы
+        """
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                x = j * self.cell_size + 1
+                y = i * self.cell_size + 1
+                a = self.cell_size - 1
+                b = self.cell_size - 1
+                if self.grid[j][i].is_alive():
+                    pygame.draw.rect(self.screen, pygame.Color('green'), (x, y, a, b))
+                else:
+                    pygame.draw.rect(self.screen, pygame.Color('white'), (x, y, a, b))
+
 
 
 class Cell():
@@ -80,7 +101,7 @@ class CellList:
                 n6 = [i + 1, g + 1],
                 n7 = [i - 1, g - 1],
                 n8 = [i + 1, g + 1]
-        x, y = cell.row, cell.row
+                neighbours.append(self.grid[i][g])
 
             return neighbours
 
@@ -88,32 +109,28 @@ class CellList:
         new_grid = deepcopy(self.grid)
         for cell in self:
             neighbours = self.get_neighbours(cell)
-            if self.grid[i][g] == 1:
-                if sum(self.get_neighbours(cell)) not in (2, 3):
-                    new_grid[i][g] = 0
-                else:
-                    new_grid[i][g] = 1
+           cnt = sum(c.is_alive() for c in neighbours)
+            if cell.is_alive():
+                if cnt < 2 or cnt > 3:
+                        new_grid[cell.row][cell.col].alive = 0
             else:
-                if sum(self.get_neighbours(cell)) == 3:
-                    new_grid[i][g] = 1
-                else:
-                    new_grid[i][g] = 0
-        count = sum(self.get_neighbours(cell))
+                if cnt == 3:
+                    new_grid[cell.row][cell.col].alive = 1
         self.grid = new_grid
         return self
 
     def __iter__(self):
-        self.i_count, self.g_count = 0, 0
+       self.i_cnt, self.g_cnt = 0, 0
         return self
 
     def __next__(self):
-            if (self.i_count == self.nrows):
+            if (self.i_cnt == self.nrows):
                 raise StopIteration
                 cell = self.grid[self.i_countnt][self.g_count]
-            self.g_count += 1
-            if self.g_count == self.ncols:
-                self.i_count += 1
-                self.g_count = 0
+            self.g_cnt += 1
+            if self.g_cnt == self.ncols:
+                self.i_cnt += 1
+                self.g_cnt = 0
 
             return cell
 
@@ -138,3 +155,8 @@ class CellList:
         clist = cls(len(grid), len(grid[0]), False)
         clist.grid = grid
         return clist
+   
+if __name__ == '__main__':
+game = GameOfLife(640, 480, 10)
+game.run()
+
