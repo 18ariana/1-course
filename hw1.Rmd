@@ -1,18 +1,18 @@
-df <- read.csv('mlbootcamp5_train.csv')
-head(df)
-mean(df$height[df$gender == 1])
-mean(df$height[df$gender == 2])
-count(df$height[df$gender == 1])
-count(df$height[df$gender == 2])
-count(df$alco[df$gender == 1] & [df$alco == 1])
+df <- read.csv('mlbootcamp5_train.csv')  
+head(df)  
+mean(df$height[df$gender == 1])  
+mean(df$height[df$gender == 2])  
+count(df$height[df$gender == 1])  
+count(df$height[df$gender == 2])  
+count(df$alco[df$gender == 1] & [df$alco == 1])  
 count(df$alco[df$gender == 2] & [df$alco == 1])
-s_w <- (count(df$gender[df$gender == 1] & [df$smoke == 1])/ count(df$gender[df$gender == 1])) * 100
-s_m <- (count(df$gender[df$gender == 2] & [df$smoke == 1])/ count(df$gender[df$gender == 2])) * 100
-print(round(s_m/s_w))
-df$age_years <- df$age /365
-mean(df$age_years[df$smoke == 1])
-mean(df$age_years[df$smoke == 0])
-print(mean(df$age_years[df$smoke == 0])*12 - mean(df$age_years[df$smoke == 1])*12)
-v1 <- df$cardio((df$gender == 2) & (df$age_years >=60) & (df$age_years <=64) & (df$smoke == 1) & (df$ap_hi < 120) & (df$cholesterol ==1))
-v2 <- df$cardio((df$gender == 2) & (df$age_years >=60) & (df$age_years <=64) & (df$smoke == 1) & (df$ap_hi >= 160) &(df$ap_hi < 180) & (df$cholesterol ==1))
-print(mean(v1*100)/mean(v2*100))
+s_w <- (count(df$gender[df$gender == 1] & [df$smoke == 1])/ count(df$gender[df$gender == 1])) * 100  
+s_m <- (count(df$gender[df$gender == 2] & [df$smoke == 1])/ count(df$gender[df$gender == 2])) * 100  
+print(round(s_m/s_w))  
+df$age_years <- df$age /365  
+mean(df$age_years[df$smoke == 1])  
+mean(df$age_years[df$smoke == 0])  
+print(mean(df$age_years[df$smoke == 0])*12 - mean(df$age_years[df$smoke == 1])*12)  
+v1 <- df$cardio((df$gender == 2) & (df$age_years >=60) & (df$age_years <=64) & (df$smoke == 1) & (df$ap_hi < 120) & (df$cholesterol ==1))  
+v2 <- df$cardio((df$gender == 2) & (df$age_years >=60) & (df$age_years <=64) & (df$smoke == 1) & (df$ap_hi >= 160) &(df$ap_hi < 180) & (df$cholesterol ==1))  
+print(mean(v1*100)/mean(v2*100))  
