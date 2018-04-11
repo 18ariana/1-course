@@ -3,7 +3,7 @@ title: "Week Two"
 output: html_notebook
 ---
 ```{r}
-df <- read.csv('C:/Users/Ã€Ã°Ã¨Ã Ã¤Ã­Ã /Desktop/proga/mlbootcamp5_train.csv')
+df <- read.csv('C:/Users/Àðèàäíà/Desktop/proga/mlbootcamp5_train.csv')
 
 heatmap(cor(df))
 ```
@@ -22,29 +22,15 @@ ggplot(df, aes(x='df$gender', y=df$weight)) +
 
 ```{r}
 df$age_years = round(df$age / 365)
-```
-
-```{r}
 df_not_cardio = subset(df,df$cardio == 0)
-```
-
-```{r}
 df_cardio = subset(df,df$cardio == 1)
 ```
 
 ```{r}
-library(reshape2)
-new_df <- df[, c('gender','cholesterol','gluc','smoke','alco','active','cardio')]
-df_melt <- melt(new_df)
 ggplot(df,aes(df$age_years,fill=factor(df$cardio))) + 
   geom_histogram(binwidth = 1, position = "dodge")
-barplot(cor(new_df))
 ```
 
-```{r}
-ggplot(new_df,aes(mac_df,fill=factor(new_df))) + 
-  geom_bar(position = "dodge")
-```
 
 ```{r}
 ggplot(df, aes(df$height, fill = factor(df$gender))) + 
