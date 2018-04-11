@@ -3,8 +3,40 @@ import psycopg2.extras
 from pprint import pprint as pp
 from tabulate import tabulate
 
-conn = psycopg2.connect("host=localhost port=5432 dbname=odscourse user=postgres password=secret")
+conn = psycopg2.connect("host=localhost port=5432 dbname=train user=postgres password=1")
 cursor = conn.cursor()  # cursor_factory=psycopg2.extras.DictCursor)
+
+query = """
+CREATE TABLE IF NOT EXISTS train (
+    id INTEGER PRIMARY KEY,
+    age INTEGER,
+    gender INTEGER,
+    height REAL,
+    weight REAL,
+    ap_hi INTEGER,
+    ap_lo INTEGER,
+    cholesterol INTEGER,
+    gluc INTEGER,
+    smoke BOOLEAN,
+    alco BOOLEAN,
+    active BOOLEAN,
+    cardio BOOLEAN
+)
+"""
+cursor.execute(query)
+conn.commit()
+
+with open('mlbootcamp5_train.csv', 'r') as f:
+    reader = csv.reader(f, delimiter=',')
+    # Skip the header row
+    next(reader)
+   for row in reader:
+        cursor.execute(
+            "INSERT INTO train VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+            row
+        )
+
+conn.commit()
 
 
 def fetch_all(cursor):
