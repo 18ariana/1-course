@@ -51,8 +51,16 @@ male <- which(sex == FALSE)
 alco_fem <- length(as.array(which(as.array(df$alco == 1) & sex == TRUE)))  
 alco_m <- length(as.array(which(as.array(df$alco == 1) & sex == FALSE)))  
 print(alco_fem)
+```
+OUT:
+```R
 1161
-print(alco_m) 
+```
+```R
+print(alco_m)
+```
+OUT:
+```R
 2603
 ````
 ### 3.Во сколько раз (округленно, round) процент курящих среди мужчин больше, чем процент курящих среди женщин (по крайней мере, по этим анкетным данным)?
