@@ -1,9 +1,9 @@
 ---
 title: "Week Two"
-output: jupyter_notebook
+output: html_notebook
 ---
 ```{r}
-df <- read.csv('C:/Users/Àðèàäíà/Desktop/proga/mlbootcamp5_train.csv')
+df <- read.csv('C:/Users/Ã€Ã°Ã¨Ã Ã¤Ã­Ã /Desktop/proga/mlbootcamp5_train.csv')
 
 heatmap(cor(df))
 ```
