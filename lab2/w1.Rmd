@@ -15,14 +15,32 @@ OUT:
 ### 1. Сколько мужчин и женщин представлено в этом наборе данных?    
 ```R
 mean(df$height[df$gender == 1]) 
+```
+OUT:
+```R
  161.3556
+ ```
+ ```R
 mean(df$height[df$gender == 2])
+```
+OUT:
+```R
 169.9479
+```
+```R
 female <- which(sex == TRUE)  
 male <- which(sex == FALSE)
 print(length(female))
+```
+OUT:
+```R
 45530
+```
+```R
 print(length(male))
+```
+OUT:
+```R
 24470
 ```
 ### 2. Кто в среднем реже указывает, что употребляет алкоголь – мужчины или женщины? 
@@ -122,7 +140,10 @@ OUT:
 ```R
 print(mean(round(df$BMI[female])))
 ```
-OUT:27.98043
+OUT:
+```R
+27.98043
+```
 ```R
 print(mean(round(df$BMI[male])))
 ```
