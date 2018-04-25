@@ -1,0 +1,51 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from copy import deepcopy
+
+data = pd.read_csv('iris.csv')
+data.head()
+
+
+def distance(v1, v2, ax=1):
+    return np.linalg.norm(v1 - v2, axis=ax)
+#axis - os'
+
+
+class KMeans:
+    def __init__(self, n_clusters, max_iter=300):
+        self.n_clusters = n_clusters
+
+    def fit(self, X):
+        n_samples = len(X)
+        centroids = X[np.random.choice(X.shape[0], self.n_clusters, replace=False)] #рандомно выбираем место центройдов, X.shape[0] - строки
+        centroids_old = np.zeros(centroids.shape)#.shape - размер массива ( длина массива по каждой оси)
+        clusters = np.zeros(n_samples) # матрица из нулей размером Х
+
+        while True:
+            for i in range(n_samples):
+                distances = distance(X[i,], centroids)
+                clusters[i] = distances.argmin() # делаем разницу в расстоянии минимальной между центроидом и кружочками кластера
+
+            centroids_old = deepcopy(centroids) #?????????????????????????
+            for k in range(self.n_clusters):
+                centroids[k] = X[clusters == k,].mean(axis=0) #определяем каждый кружочек к какому-нибудь кластеру
+
+            error = distance(centroids, centroids_old, None) # случай,когда центроид перестаёт двигаться ,соответственно он определён верно
+            if error == 0:
+                break
+
+        self.clusters = clusters.astype('int')
+        self.centroids = centroids
+
+    def predict(self, y):
+        # выводит координаты центроидов
+        clusters = []
+
+
+
+model = KMeans(3)
+X = (data.loc[:, data.columns != 'Name']).as_matrix()
+print(X)
+model.fit(X)
+print(model.clusters)
