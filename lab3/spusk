@@ -1,0 +1,35 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('brain_size.csv')
+
+class GDRegression:
+    def __init__(self, alpha=0.01, n_iter=100):
+        self.alpha = alpha
+        self.iter = n_iter
+
+    def fit(self, X, y): # x - матрица признаков, у - вектор ответов
+        self.theta = np.zeros((2, 1))
+        X = pd.concat([X]) # совмещаем базы данных
+        self.theta_history = [(np.zeros((2, 1)))] * self.iter
+        self.cost_history = [0] * self.iter
+        m = len(y) #number of training examples
+        t = X.transpose()
+        for i in range(1, self.iter):
+            self.theta -= self.alpha * (1 / m) * np.dot(t, (np.dot(X, self.theta) - y)) #self.theta[0] - вектор значений
+            self.theta[1] -= self.alpha * (1 / m) * np.dot(t, (np.dot(X, self.theta[1]) - y))
+            self.theta_history[i] = self.theta
+            self.cost_history[i] = sum((np.dot(X, self.theta) - y) ** 2) / (2 * m)
+        coef_ = self.theta[0]
+        intercept_ = self.theta[1]
+        return coef_, intercept_
+
+    def predict(self, X_test):
+        pass
+
+
+if __name__ == '__main__':
+    X = df.iloc[:, 1:2]
+    Y = df['VIQ']
+    model = GDRegression()
+    print(model.fit(X, Y))
