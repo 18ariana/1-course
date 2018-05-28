@@ -26,7 +26,7 @@ class KMeans:
             for k in range(self.n_clusters):
                 centroids[k] = X[clusters == k,].mean(axis=0)   # определяем каждый центроид к какому-нибудь кластеру
             error = distance(centroids, centroids_old, None)    # центроид перестаёт двигаться => он определён верно
-            if error == 0,01:
+            if (error >= 0) and (error <= 0.01):
                 self.clusters = clusters.astype('int')  # принадлежность элемента к тому или иному кластеру
                 self.centroids = centroids  # центроиды
                 break
@@ -41,7 +41,7 @@ class KMeans:
         y_unique_num = [i for i in range(len(np.unique(y)))]    # номера для кластеров
         n_samples = len(X)
         clusters = np.zeros(n_samples)  # матрица из нулей размером Х
-        for k in range(n_samples):
+        for k in range(n_samples): #кластерам присваиваются цифры вместо названий
             for j in range(self.n_clusters):
                 if y[k][0] == y_unique[j]:
                     y[k] = y_unique_num[j]
@@ -60,7 +60,7 @@ class KMeans:
 if __name__ == '__main__':
     data = pd.read_csv('iris.csv')
     model = KMeans(3)
-    X = (data.loc[:, data.columns != 'Name']).as_matrix()
+    X = (data.loc[:, data.columns != 'Name']).as_matrix() # берется выборка
     y = (data.loc[:, data.columns == 'Name']).as_matrix()
     model.fit(X)
     print(model.predict(y))
