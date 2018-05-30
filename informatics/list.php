@@ -8,8 +8,9 @@ $link = mysqli_connect($host, $user, $password, $database)
 echo "Вы подключились!<br>";
 
 $query = "SELECT id_application, registration.name, faculty.id_fac from registration 
-	join enrollee on registration.id_enrollee = enrollee.id_enrollee join exams on 
-	registration.registration_exam=exams.registration_exam join faculty on registration.id_fac = faculty.id_fac";
+	join enrollee on registration.id_enrollee = enrollee.id_enrollee 
+	join exams on registration.registration_exam=exams.registration_exam 
+	join faculty on registration.id_fac = faculty.id_fac";
 
 $result = mysqli_query($link, $query);
 
