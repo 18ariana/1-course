@@ -23,10 +23,12 @@ else {
 
 
 
-echo "<table border = 3 align = center> <tr> <td> Name </td> <td> Факультет </td></tr>";
+echo "<table border = 3 align = center> <tr> <td> Name </td> <td> Факультет </td> <td colspan = '2'>Редактировать</td></tr>";
 
 while($row = mysqli_fetch_array($result)) {
-	echo "<tr><td>" . $row['name']. "</td><td>" . $row['id_fac'] . "</td></tr>";
+	echo "<tr><td>" . $row['name']. "</td>";
+	echo "<td>" . $row['id_fac'] . "</td>";
+	echo "<td><a href = 'edit.php?id=" . " </td></tr>";
 }
 
 echo "</table>";
