@@ -1,50 +1,52 @@
 <?php
 
 include "connection.php";
-$id = $_GET['id_abiturient'];
-$name_abit = $_GET['input_1'];
-$name_kaf = $_GET['input_2'];
-$query = "SELECT abit.name, kaf.name_kaf FROM abit JOIN kaf 
-		ON abit.specialization = kaf.name_specialization
-		WHERE  abit.name LIKE '%" . $name_abit . "%' 
-		AND kaf.name_kaf LIKE '%" . $name_kaf . "%'";
+
+$link = mysqli_connect($host, $user, $password, $database) 
+    or die ("Ошибка подключения к базе данных" . mysqli_error());
+
+$id = $_GET['id_application'];
+$name_en = $_GET['name'];
+$id_fac = $_GET['faculty'];
+
+$query = "SELECT registration.name, faculty.id_fac from registration 
+	join enrollee on registration.id_enrollee = enrollee.id_enrollee 
+	join exams on registration.registration_exam=exams.registration_exam
+	join faculty on registration.id_fac = faculty.id_fac
+	WHERE registration.name = $name_en and id_fac = $id_fac";
 	
 $result = mysqli_query($link, $query);
  
-// script for update
 if(isset($_GET['button']))
 {
-	$input_1 = $_GET['input_1'];
-	$input_2 = $_GET['input_2'];
-	$id_abiturient = $id;
-	$query = "UPDATE abit
-		SET name ='" . $input_1 . "'
-		WHERE id_abiturient =' " . $id_abiturient . " '; ";
+	$id = $_GET['id_application'];
+	$name_en = $_GET['name'];
+	$id_fac = $_GET['faculty'];
+	
+	$query = "UPDATE registration
+		SET name ='" . $name_en . "'
+		WHERE id_application =' " . $id . " '; ";
 			
 	$result = mysqli_query($link, $query);
 			
-	$query = "UPDATE kaf
-		SET name_kaf ='" . $input_2 . "';";
+	$query = "UPDATE faculty
+		SET id_fac ='" . $id_fac . "';";
 			
 	$result = mysqli_query($link, $query);
-	// redirect
+
 	header('location: ./list.php'); 
 }
 ?>
 
 <html>
 <body>
-	<div  align = center>
 	<form action = 'edit.php' method = 'get'>
-	<table>
-	<tr><th><i>Редактировать значения:</i></th></tr>
-	<tr hidden><td>ID абитуриента: <input name = 'id_abiturient' type = 'text' value='<?php echo $id; ?>'></td></tr>
-	<tr><td>Имя абитуриента: <input name = 'input_1' type = 'text' value='<?=@$_GET['input_1']?>'></td></tr>
-	<tr><td>Название кафедры: <input name = 'input_2' type = 'text' value='<?=@$_GET['input_2']?>'></td></tr>
-	</table>
+	<i>Редактировать значения:</i></th></tr>
+	<p hidden>ID абитуриента: <input name = 'id_application' type = 'text' value='<?php echo $id; ?>'>
+	<p>Имя абитуриента: <input name = 'name_en' type = 'text' value='<?=@$_GET['name_en']?>'>
+	<p>Название кафедры: <input name = 'faculty' type = 'text' value='<?=@$_GET['id_fac']?>'>
 	<br/>
 	<input type = 'submit' name = 'button'>
 	</form>
-	</div> 
 </body>
 </html>
