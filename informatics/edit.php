@@ -41,10 +41,10 @@ if(isset($_GET['button']))
 <html>
 <body>
 	<form action = 'edit.php' method = 'get'>
-	<i>Редактировать значения:</i></th></tr>
-	<p hidden>ID абитуриента: <input name = 'id_application' type = 'text' value='<?php echo $id; ?>'>
-	<p>Имя абитуриента: <input name = 'name_en' type = 'text' value='<?=@$_GET['name_en']?>'>
-	<p>Название кафедры: <input name = 'faculty' type = 'text' value='<?=@$_GET['id_fac']?>'>
+	<i>Редактировать значения:</i>
+	<p hidden>ID абитуриента: <input name = 'id_application' type = 'text' value='<?php echo $id; ?>'></p>
+	<p>Имя абитуриента: <input name = 'name_en' type = 'text' value='<?=@$_GET['name_en']?>'></p>
+	<p>Название кафедры: <input name = 'faculty' type = 'text' value='<?=@$_GET['id_fac']?>'></p>
 	<br/>
 	<input type = 'submit' name = 'button'>
 	</form>
