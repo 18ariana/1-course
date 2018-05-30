@@ -1,5 +1,5 @@
 <?php
-// edit records
+
 include "connection.php";
 $id = $_GET['id_abiturient'];
 $name_abit = $_GET['input_1'];
@@ -10,31 +10,13 @@ $query = "SELECT abit.name, kaf.name_kaf FROM abit JOIN kaf
 		AND kaf.name_kaf LIKE '%" . $name_kaf . "%'";
 	
 $result = mysqli_query($link, $query);
-?>
-
-<html>
-<body>
-	<form action = 'edit.php' method = 'get'>
-	<table>
-	<tr><th><i>Редактировать значения:</i></th></tr>
-	<tr hidden><td>ID абитуриента: <input name = 'id_abiturient' type = 'text' value='<?=@$_GET['id_abiturient']?>'></td></tr>
-	<tr><td>Имя абитуриента: <input name = 'input_1' type = 'text' value='<?=@$_GET['input_1']?>'></td></tr>
-	<tr><td>Название кафедры: <input name = 'input_2' type = 'text' value='<?=@$_GET['input_2']?>'></td></tr>
-	</table>
-	<br/>
-	<input type = 'submit' name = 'button'>
-	</form>
-</body>
-</html>
-
-<?php
  
 // script for update
 if(isset($_GET['button']))
 {
 	$input_1 = $_GET['input_1'];
 	$input_2 = $_GET['input_2'];
-	$id_abiturient = $_GET['id_abiturient'];
+	$id_abiturient = $id;
 	$query = "UPDATE abit
 		SET name ='" . $input_1 . "'
 		WHERE id_abiturient =' " . $id_abiturient . " '; ";
@@ -48,3 +30,21 @@ if(isset($_GET['button']))
 	// redirect
 	header('location: ./list.php'); 
 }
+?>
+
+<html>
+<body>
+	<div  align = center>
+	<form action = 'edit.php' method = 'get'>
+	<table>
+	<tr><th><i>Редактировать значения:</i></th></tr>
+	<tr hidden><td>ID абитуриента: <input name = 'id_abiturient' type = 'text' value='<?php echo $id; ?>'></td></tr>
+	<tr><td>Имя абитуриента: <input name = 'input_1' type = 'text' value='<?=@$_GET['input_1']?>'></td></tr>
+	<tr><td>Название кафедры: <input name = 'input_2' type = 'text' value='<?=@$_GET['input_2']?>'></td></tr>
+	</table>
+	<br/>
+	<input type = 'submit' name = 'button'>
+	</form>
+	</div> 
+</body>
+</html>
