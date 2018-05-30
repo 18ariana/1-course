@@ -21,7 +21,7 @@ echo "<td colspan = 2>Редактировать</td></tr>";
 while($row = mysqli_fetch_array($result)) {
 	echo "<tr><td>" . $row['name']. "</td>";
 	echo "<td>" . $row['id_fac'] . "</td>";
-	echo "<td><a href = './edit.php?id_application=" . $row['id_application'] . "&name=" . $row['name'] . "&faculty=" . $row['id_fac'] . "'>Update</a></td>";
+	echo "<td><a href = './edit.php?id_application=" . $row['id_application'] . "&name_en=" . $row['name'] . "&faculty=" . $row['id_fac'] . "'>Update</a></td>";
 	echo "<td><a href = './delete.php?id_application=". $row['id_application'] . "'>Delete</a></td></tr>";
 }
 echo "</table>";
