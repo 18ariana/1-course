@@ -13,24 +13,16 @@ $query = "SELECT id_application, registration.name, faculty.id_fac from registra
 	join faculty on registration.id_fac = faculty.id_fac";
 
 $result = mysqli_query($link, $query);
-
-if($result) {
-	echo "Всё получилось!";
-}
-else {
-	echo " Не всё получилось:(" . mysqli_error($link);
-}
-
-
-
-echo "<table border = 3 align = center> <tr> <td> Name </td> <td> Факультет </td> <td colspan = '2'>Редактировать</td></tr>";
+echo "<table border = 1 align=center>";
+echo "<tr><td>Имя</td>";
+echo "<td>Факультет</td>";
+echo "<td colspan = 2>Редактировать</td></tr>";
 
 while($row = mysqli_fetch_array($result)) {
 	echo "<tr><td>" . $row['name']. "</td>";
 	echo "<td>" . $row['id_fac'] . "</td>";
-	echo "<td><a href = 'edit.php?id=" . " </td></tr>";
+	echo "<td><a href = './edit.php?id_abiturient=" . $row['id_application'] . "&input_1=" . $row['name'] . "&input_2=" . $row['id_fac'] . "'>Update</a></td>";
+	echo "<td><a href = './delete.php?id_abiturient=". $row['id_application'] . "'>Delete</a></td></tr>";
 }
-
 echo "</table>";
-
 mysqli_close($link);
