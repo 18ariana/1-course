@@ -21,8 +21,6 @@ class GDRegressor:
         """
         X = X_train.copy()
         X.insert(0, "Ones", np.ones(len(X)))
-        y = y_train.copy()
-        y.insert(0, "Ones", np.ones(len(X)))
         self.theta = np.zeros(X.shape)  # создаём нулевую матрицу для значений теты, рамзером с выборку
         t = X.T
         m = len(y)
@@ -33,6 +31,7 @@ class GDRegressor:
             # формула градиентного спуска, для подсчёта значений теты
             self.theta -= self.alpha * (t.dot(self.theta * X - y.as_matrix().reshape((40, 2)))) / m
             print(self.theta)
+            #x.dot(theta) - y ;
             # записываем старые значения теты
             self.theta_history[i] = self.theta
             # записываем старые значения целевой функции
