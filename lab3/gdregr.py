@@ -21,20 +21,22 @@ class GDRegressor:
         """
         X = X_train.copy()
         X.insert(0, "Ones", np.ones(len(X)))
+        y = y_train.copy()
+        y.insert(0, "Ones", np.ones(len(X)))
         self.theta = np.zeros(X.shape)  # создаём нулевую матрицу для значений теты, рамзером с выборку
         t = X.T
-        m = len(y_train)
+        m = len(y)
         for i in range(1, self.max_iter):
             """
             цикл, внутри которого будем высчитывать значения теты, сохранять значения целевой функции
             """
             # формула градиентного спуска, для подсчёта значений теты
-            self.theta -= self.alpha * (t.dot(self.theta * X - y_train.reshape((m, 1)))) / m
+            self.theta -= self.alpha * (t.dot(self.theta * X - y.as_matrix().reshape((40, 2)))) / m
             print(self.theta)
             # записываем старые значения теты
             self.theta_history[i] = self.theta
             # записываем старые значения целевой функции
-            self.cost_history[i] = sum((self.theta * X.as_matrix() - y_train.reshape((m, 1)) ** 2)) / (2 * m)
+            self.cost_history[i] = sum((self.theta * X.as_matrix() - y.reshape((40, 2)) ** 2)) / (2 * m)
 
         self.coef_ = self.theta[1]
         self.intercept_ = self.theta[0]
@@ -56,7 +58,7 @@ class GDRegressor:
 if __name__ == '__main__':
     df = pd.read_csv('brain_size.csv')
     X = df.iloc[:, 1:2]
-    Y = df['VIQ'].as_matrix()
+    Y = df.iloc[:, 2:3]
     model = GDRegressor()
     model.fit(X, Y)
     model.predict(X)
