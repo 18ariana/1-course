@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 class GDRegressor:
-    def __init__(self, alpha=0.01, max_iter=20):
+    def __init__(self, alpha=0.000001, max_iter=1000):
         self.alpha = alpha
         self.max_iter = max_iter
         self.theta_history = [0] * self.max_iter  # переменная для сохранения теты
@@ -29,8 +29,7 @@ class GDRegressor:
             цикл, внутри которого будем высчитывать значения теты, сохранять значения целевой функции
             """
             # формула градиентного спуска, для подсчёта значений теты
-            self.theta -= self.alpha * (t.dot(self.theta * X - y.as_matrix().reshape((40, 2)))) / m
-            print(self.theta)
+            self.theta -= self.alpha * 1 / m * (t.dot(X.dot(self.theta.reshape((2, m)) - y_train))).as_matrix().reshape((m, 2))
             #x.dot(theta) - y ;
             # записываем старые значения теты
             self.theta_history[i] = self.theta
@@ -47,8 +46,10 @@ class GDRegressor:
         :param X_test: тестовая выборка
         :return: вектор прогнозов для новых данных (произведение тестовой выборки на вектор весов)
         """
+        X = X_test.copy()
+        X.insert(0, "Ones", np.ones(len(X)))
         m = X_test.size  # считаем размер выборки
-        y = X_test.dot(self.theta.reshape(1, m))  # перемножаем выборку и вектор весов
+        y = X.dot(self.theta.reshape(2, m))  # перемножаем выборку и вектор весов
         self.pred = y[0]
 
         return self.pred
@@ -63,5 +64,5 @@ if __name__ == '__main__':
     model.predict(X)
     #df.plot(kind='scatter', x="FSIQ", y="VIQ")
     #plt.plot(X, model.coef_[0] * X + model.intercept_, 'r')
-    plt.plot(range(len(model.cost_history)), model.cost_history)
+    plt.plot(range(len(model.cost_history) - 1), [model.cost_history[i][0] for i in range(1, len(model.cost_history)) for j in range(1)])
     plt.show()
